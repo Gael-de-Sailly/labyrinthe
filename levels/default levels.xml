@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level_list>
+	<level name="Level 0">
+		<grounds>
+			<start type="oval">50 280 130 320</start>
+			<goal type="oval">670 280 750 320</goal>
+			<simple type="rect">90 280 710 320</simple>
+		</grounds>
+	</level>
+	<level name="Level 1">
+		<grounds>
+			<start type="rect">10 10 40 40</start>
+			<simple type="polygon">40 10 520 50 520 300 200 590 200 540 500 220 500 70 40 40</simple>
+			<bad type="polygon">500 240 500 280 400 380</bad>
+			<goal type="rect">150 540 200 590</goal>
+		</grounds>
+	</level>
+</level_list>
