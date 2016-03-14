@@ -1,4 +1,4 @@
-from tkinter import Tk, Canvas, mainloop
+from tkinter import Tk, Canvas, Label
 import time
 from parser import *
 
@@ -11,6 +11,8 @@ FILL_NEUTRAL = "#b0b0b0"
 class Game:
 	def __init__(self, W, H, levelfile):
 		master = Tk()
+		text = Label(master, font=("Georgia", 20, "bold"), text="Loading...")
+		text.pack()
 		canvas = Canvas(master, width=W, height=H, bg=FILL_NEUTRAL)
 		canvas.pack()
 		canvas.bind("<Motion>", self.update)
@@ -21,11 +23,19 @@ class Game:
 			self.levels.append(Level(level))
 		self.nlevel = 0
 		self.current_level = self.levels[0]
+		text.config(text=self.current_level.name)
+		self.text = text
 		self.canvas = canvas
 		self.playing = False
 		self.W = W
 		self.H = H
 		self.display()
+
+	def increment_level(self):
+		n = (self.nlevel + 1) % len(self.levels)
+		self.nlevel = n
+		self.current_level = self.levels[n]
+		self.text.config(text=self.current_level.name)
 
 	def display(self):
 		canvas = self.canvas
@@ -45,7 +55,7 @@ class Game:
 			canvas.config(background=FILL_NEUTRAL)
 			canvas.create_text((self.W / 2, self.H / 2), font=("Georgia", 40, "bold"), text="Perdu !", fill=FILL_BG)
 			canvas.update()
-			time.sleep(4)
+			time.sleep(1)
 			self.display()
 
 	def click(self, event):
@@ -55,20 +65,16 @@ class Game:
 		if self.playing:
 			if zone == "goal":
 				self.playing = False
-				self.nlevel += 1
 				text = "Gagné !"
-				win = self.nlevel >= len(self.levels)
+				win = self.nlevel + 1 == len(self.levels)
 				if win:
 					text = "Gagné à tous les niveaux !"
-					self.nlevel = 0
-					self.current_level = self.levels[0]
-				else:
-					self.current_level = self.levels[self.nlevel]
 				canvas.delete("all")
 				canvas.config(background=FILL_NEUTRAL)
 				canvas.create_text((self.W / 2, self.H / 2), font=("Georgia", 40, "bold"), text=text, fill=FILL_GOAL)
 				canvas.update()
-				time.sleep(4)
+				time.sleep(1)
+				self.increment_level()
 				self.display()
 		else:
 			if zone == "start":
