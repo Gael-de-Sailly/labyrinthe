@@ -1,6 +1,6 @@
 from tkinter import Tk, Canvas, Label
 import time
-from parser import *
+from level_parser import *
 
 FILL_BG = "#980000"
 FILL_FG = "#ffe8a0"
