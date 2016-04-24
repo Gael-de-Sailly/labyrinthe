@@ -37,10 +37,20 @@ class Game:
 		self.current_level = self.levels[n]
 		self.text.config(text=self.current_level.name)
 
-	def display(self):
+	def display(self): # Display the (disabled) level initially
 		canvas = self.canvas
 		canvas.delete("all")
 		self.current_level.display(canvas, self.playing)
+		canvas.update()
+
+	def activate_game(self): # Make changes to enable items and begin game
+		canvas = self.canvas
+		canvas.config(background=FILL_BG)
+		canvas.itemconfig("ground", state="normal")
+
+	def update_view(self): # Move items if animated (not implemented yet)
+		canvas = self.canvas
+		self.current_level.update_view(canvas, self.playing)
 		canvas.update()
 
 	def update(self, event):
@@ -79,20 +89,28 @@ class Game:
 		else:
 			if zone == "start":
 				self.playing = True
-				canvas.delete("all")
-				canvas.config(background=FILL_BG)
-				self.display()
+				self.activate_game()
+				self.update_view()
 
 class Level:
 	def __init__(self, element):
 		self.name, ground_list = parse_level(element)
 		self.grounds = []
+		self.animated_grounds = []
 		for ground in ground_list:
+			obj = Ground(ground)
 			self.grounds.append(Ground(ground))
+			if obj.animated:
+				self.animated_grounds.append(obj)
 
 	def display(self, canvas, playing):
 		for ground in self.grounds:
 			ground.display(canvas, playing)
+
+	def update_view(self, canvas, playing):
+		for ground in self.animated_grounds:
+			vert = obj.anim.move(ground.vert)
+			canvas.coords(ground.id, vert)
 
 	def get_zone(self, pos):
 		for ground in reversed(self.grounds): # Iterate from the foreground to the background
@@ -180,29 +198,29 @@ class Ground:
 			return
 
 		vert = self.vert
+		props = self.properties
+		shape = self.shape
 		color = FILL_NEUTRAL
-		if playing:
-			if self.properties == "simple":
-				color = FILL_FG
-			elif self.properties == "bad":
-				color = FILL_BG
-			elif self.properties == "goal":
-				color = FILL_GOAL
-			elif self.properties == "start":
-				color = FILL_START
-		else:
-			if self.properties == "start":
-				color = FILL_START
+		state = "disabled"
+		if props == "simple":
+			color = FILL_FG
+		elif props == "bad":
+			color = FILL_BG
+		elif props == "goal":
+			color = FILL_GOAL
+		elif props == "start":
+			color = FILL_START
+			state = "normal"
 
 		if self.animated:
 			vert = self.anim.move(vert)
 
-		if self.shape == "rect":
-			canvas.create_rectangle(vert, fill=color, outline="black")
-		elif self.shape == "oval":
-			canvas.create_oval(vert, fill=color, outline="black")
-		elif self.shape == "polygon":
-			canvas.create_polygon(vert, fill=color, outline="black")
+		if shape == "rect":
+			self.id = canvas.create_rectangle(vert, fill=color, outline="black", disabledfill=FILL_NEUTRAL, state=state, tags=(props, "ground"))
+		elif shape == "oval":
+			self.id = canvas.create_oval(vert, fill=color, outline="black", disabledfill=FILL_NEUTRAL, state=state, tags=(props, "ground"))
+		elif shape == "polygon":
+			self.id = canvas.create_polygon(vert, fill=color, outline="black", disabledfill=FILL_NEUTRAL, state=state, tags=(props, "ground"))
 
 	def contains(self, pos):
 		if not self.active:
