@@ -1,18 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level_list>
-	<level name="Level 0">
+	<level name="Level 1">
 		<grounds>
 			<start type="oval">50 280 130 320</start>
 			<goal type="oval">670 280 750 320</goal>
 			<simple type="rect">90 280 710 320</simple>
 		</grounds>
 	</level>
-	<level name="Level 1">
+	<level name="Level 2">
+		<grounds>
+			<start type="oval">50 50 150 150</start>
+			<simple type="oval">75 75 325 325</simple>
+			<simple type="oval">460 300 700 540</simple>
+			<simple type="oval">240 240 490 490</simple>
+			<bad type="oval">270 270 460 460</bad>
+			<goal type="oval">600 450 700 550</goal>
+		</grounds>
+	</level>
+	<level name="Level 3">
 		<grounds>
 			<start type="rect">10 10 40 40</start>
 			<simple type="polygon">40 10 520 50 520 300 200 590 200 540 500 220 500 70 40 40</simple>
 			<bad type="polygon">500 240 500 280 400 380</bad>
 			<goal type="rect">150 540 200 590</goal>
+		</grounds>
+	</level>
+	<level name="Level 4">
+		<grounds>
+			<start type="polygon">100 300 250 350 250 250</start>
+			<goal type="polygon">700 300 550 250 550 350</goal>
+			<simple type="polygon">375 475 375 450 300 375 300 225 387.5 137.5 387.5 287.5 312.5 287.5 312.5 312.5 387.5 312.5 387.5 487.5 400 500 600 300 500 200 500 375 462.5 412.5 462.5 312.5 487.5 312.5 487.5 287.5 462.5 287.5 462.5 162.5 437.5 137.5 437.5 287.5 412.5 287.5 412.5 112.5 400 100 200 300</simple>
+			<bad type="polygon">412.5 312.5 437.5 312.5 437.5 437.5 412.5 462.5</bad>
+			<bad type="oval">525 287.5 550 312.5</bad>
 		</grounds>
 	</level>
 </level_list>
