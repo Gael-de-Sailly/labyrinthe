@@ -9,7 +9,7 @@ FILL_START = "#009000"
 FILL_NEUTRAL = "#b0b0b0"
 
 class Game:
-	def __init__(self, W, H, levelfile):
+	def __init__(self, W, H, levelfile, fps=20):
 		master = Tk()
 		text = Label(master, font=("Georgia", 20, "bold"), text="Loading...")
 		text.pack()
@@ -17,6 +17,7 @@ class Game:
 		canvas.pack()
 		canvas.bind("<Motion>", self.update)
 		canvas.bind("<Button-1>", self.click)
+		canvas.bind("<Escape>", self.quit)
 		levels = parse_file(levelfile)
 		self.levels = []
 		for level in levels:
@@ -26,9 +27,11 @@ class Game:
 		text.config(text=self.current_level.name)
 		self.text = text
 		self.canvas = canvas
+		self.running = True
 		self.playing = False
 		self.W = W
 		self.H = H
+		self.tick = 1 / fps
 		self.display()
 
 	def increment_level(self):
@@ -92,16 +95,38 @@ class Game:
 				self.activate_game()
 				self.update_view()
 
+	def quit(self):
+		self.running = False
+
+	def mainloop(self):
+		tick = self.tick
+		t0 = time.perf_counter() // tick
+		warning = False
+		while self.running:
+			t = divmod(time.perf_counter(), tick)
+			if t[0] > t0 and not warning:
+				warning = True
+				print("Warning: can't reach", fps, "fps. Try a lower value.")
+			else:
+				time.sleep(tick-t[1])
+
+			t0 = max(t0+1, t[0])
+
+			if self.current_level.animated:
+				self.update_view()
+
 class Level:
 	def __init__(self, element):
 		self.name, ground_list = parse_level(element)
 		self.grounds = []
 		self.animated_grounds = []
+		self.animated = False
 		for ground in ground_list:
 			obj = Ground(ground)
 			self.grounds.append(Ground(ground))
 			if obj.animated:
 				self.animated_grounds.append(obj)
+				self.animated = True
 
 	def display(self, canvas, playing):
 		for ground in self.grounds:
