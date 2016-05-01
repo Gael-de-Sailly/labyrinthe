@@ -1,5 +1,7 @@
 from labyrinthe import *
 from tkinter import mainloop, filedialog
+import os
+import sys
 
 #level = [
 #	[(10, 10, 40, 40), "rect", "Start"],
@@ -10,7 +12,8 @@ from tkinter import mainloop, filedialog
 
 master = Tk()
 
-level = filedialog.askopenfilename(parent=master)
+path = os.path.dirname(os.path.realpath(sys.argv[0])) + "/levels"
+level = filedialog.askopenfilename(initialdir=path, parent=master)
 
 if level:
 	jeu = Game(level, parent=master)
