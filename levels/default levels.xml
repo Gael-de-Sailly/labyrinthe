@@ -34,4 +34,66 @@
 			<bad type="oval">525 287.5 550 312.5</bad>
 		</grounds>
 	</level>
+	<level name="Level 5">
+		<grounds>
+			<start type="rect">50 50 100 100</start>
+			<simple type="rect">62.5 100 112.5 150</simple>
+			<simple type="rect">112.5 75 162.5 125</simple>
+			<simple type="rect">150 125 200 175</simple>
+			<simple type="rect">175 175 275 275</simple>
+			<bad type="rect">185 185 220 220</bad>
+			<bad type="rect">230 185 265 220</bad>
+			<bad type="rect">185 230 220 265</bad>
+			<bad type="rect">230 230 265 265</bad>
+			<simple type="rect">275 212.5 325 262.5</simple>
+			<simple type="rect">325 175 375 225</simple>
+
+			<start type="rect">700 50 750 100</start>
+			<simple type="rect">687.5 100 737.5 150</simple>
+			<simple type="rect">637.5 75 687.5 125</simple>
+			<simple type="rect">600 125 650 175</simple>
+			<simple type="rect">525 175 625 275</simple>
+			<bad type="rect">580 185 615 220</bad>
+			<bad type="rect">535 185 570 220</bad>
+			<bad type="rect">580 230 615 265</bad>
+			<bad type="rect">535 230 570 265</bad>
+			<simple type="rect">475 212.5 525 262.5</simple>
+			<simple type="rect">425 175 475 225</simple>
+
+			<simple type="rect">375 137.5 425 187.5</simple>
+			<bad type="rect">387.5 150 412.5 175</bad>
+
+			<goal type="rect">50 500 100 550</goal>
+			<simple type="rect">62.5 450 112.5 500</simple>
+			<simple type="rect">112.5 475 162.5 525</simple>
+			<simple type="rect">150 425 200 475</simple>
+			<simple type="rect">175 325 275 425</simple>
+			<bad type="rect">185 380 220 415</bad>
+			<bad type="rect">230 380 265 415</bad>
+			<bad type="rect">185 335 220 370</bad>
+			<bad type="rect">230 335 265 370</bad>
+			<simple type="rect">275 337.5 325 387.5</simple>
+			<simple type="rect">325 375 375 425</simple>
+
+			<goal type="rect">700 500 750 550</goal>
+			<simple type="rect">687.5 450 737.5 500</simple>
+			<simple type="rect">637.5 475 687.5 525</simple>
+			<simple type="rect">600 425 650 475</simple>
+			<simple type="rect">525 325 625 425</simple>
+			<bad type="rect">580 380 615 415</bad>
+			<bad type="rect">535 380 570 415</bad>
+			<bad type="rect">580 335 615 370</bad>
+			<bad type="rect">535 335 570 370</bad>
+			<simple type="rect">475 337.5 525 387.5</simple>
+			<simple type="rect">425 375 475 425</simple>
+
+			<simple type="rect">375 412.5 425 462.5</simple>
+			<bad type="rect">387.5 425 412.5 450</bad>
+
+			<simple type="rect">387.5 187.5 412.5 412.5</simple>
+			<simple type="oval">320 260 480 340</simple>
+			<bad type="oval">340 270 460 330</bad>
+			<start type="oval">370 285 430 315</start>
+		</grounds>
+	</level>
 </level_list>
