@@ -61,7 +61,7 @@ class Game:
 		if not self.playing:
 			return
 		canvas = self.canvas
-		pos = (event.x, event.y)
+		pos = (event.x - 1, event.y - 1)
 		zone = self.current_level.get_zone(pos)
 		if zone == "bad":
 			self.playing = False
