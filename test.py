@@ -8,10 +8,12 @@ from tkinter import mainloop, filedialog
 #	[(150, 540, 200, 590), "rect", "Goal"],
 #]
 
-level = filedialog.askopenfilename()
+master = Tk()
+
+level = filedialog.askopenfilename(parent=master)
 
 if level:
-	jeu = Game(800, 600, level)
+	jeu = Game(level, parent=master)
 	mainloop()
 else:
 	print("Invalid file")

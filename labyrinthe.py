@@ -9,14 +9,17 @@ FILL_START = "#009000"
 FILL_NEUTRAL = "#b0b0b0"
 
 class Game:
-	def __init__(self, W, H, levelfile):
-		master = Tk()
+	def __init__(self, levelfile, width=800, height=600, parent=None):
+		master = parent or Tk()
+
 		text = Label(master, font=("Georgia", 20, "bold"), text="Loading...")
 		text.pack()
-		canvas = Canvas(master, width=W, height=H, bg=FILL_NEUTRAL)
+
+		canvas = Canvas(master, width=width, height=height, bg=FILL_NEUTRAL)
 		canvas.pack()
 		canvas.bind("<Motion>", self.update)
 		canvas.bind("<Button-1>", self.click)
+
 		levels = parse_file(levelfile)
 		self.levels = []
 		for level in levels:
@@ -27,8 +30,9 @@ class Game:
 		self.text = text
 		self.canvas = canvas
 		self.playing = False
-		self.W = W
-		self.H = H
+		self.W = width
+		self.H = height
+
 		self.display()
 
 	def increment_level(self):
